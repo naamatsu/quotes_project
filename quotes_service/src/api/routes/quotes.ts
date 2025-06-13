@@ -1,15 +1,11 @@
 import express from 'express';
 import { getQuotes } from '../controllers/quotes';
+
 const router = express.Router();
 
-import { Request, Response } from 'express';
-
-router.get('/:count', async (req: Request, res: Response) => {
-  try {
-    res.send(await getQuotes(req, res));
-  } catch (error) {
-    res.status(500).json({ error: 'Internal Server Error' });
-  }
+// Ensure getQuotes is a function with (req, res, next?) signature
+router.get('/:count', (req, res) => {
+  getQuotes(req, res);
 });
 
 export default router;

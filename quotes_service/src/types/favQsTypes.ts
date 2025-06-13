@@ -7,6 +7,7 @@ export interface Quote {
   upvotes_count: number;
   downvotes_count: number;
   author_permalink: string;
+  url: string;
 }
 
 export interface FavQsResponse {
@@ -22,4 +23,16 @@ export interface FavQsError {
     data?: any;
   };
   message: string;
+}
+
+export interface Session {
+    quotes: Quote[];
+    page: number;
+    returned: number;
+}
+
+export interface GetQuotesResponse {
+   quotes: Quote[];
+   continuationToken: string;
+   done: boolean;
 }
