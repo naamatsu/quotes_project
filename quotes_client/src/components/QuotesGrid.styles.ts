@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 
 export const Table = styled.table`
   width: 100%;
@@ -51,4 +51,32 @@ export const Button = styled.button<{ disabled?: boolean }>`
 export const PageInfo = styled.span`
   font-size: 1rem;
 `;
+
+
+const spin = keyframes`
+  to {
+    transform: rotate(360deg);
+  }
+`;
+
+export const LoadingContainer = styled.div`
+  padding: 2rem;
+  text-align: center;
+`;
+
+export const Spinner = styled.div`
+  width: 36px;
+  height: 36px;
+  border: 4px solid #ccc;
+  border-top: 4px solid black;
+  border-radius: 50%;
+  animation: ${spin} 0.8s linear infinite;
+  margin: 0 auto 10px;
+`;
+
+export const LoadingMessage = styled.p`
+  font-size: 1rem;
+  color: #333;
+`;
+
 

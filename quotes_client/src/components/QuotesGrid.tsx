@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from "react";
 import type { Quote, QuoteMap } from "../types";
-import { Table, Th, Td, Tag, Controls, Button, PageInfo} from './QuotesGrid.styles';
+import { Table, Th, Td, Tag, Controls, Button, PageInfo, LoadingContainer, Spinner, LoadingMessage} from './QuotesGrid.styles';
 import { getQuotes } from "../services/quotes.service";
 
 interface QuoteGridProps {
@@ -13,12 +13,15 @@ const QuotesGrid: React.FC<QuoteGridProps> = ({ count }) => {
     const [continuationToken, setContinuationToken] = useState<string>();
     const [totalPages, setTotalPages] = useState<number>(0);
     const [currentPage, setCurrentPage] = useState<number>(1)
+    const [loading, setLoading] = useState<boolean>(false);
 
      const fetchQuotesPaged = async () => {
+        setLoading(true);
         const result = await getQuotes({ count, continuationToken })
         setQuotesMap({...quotesMap, [currentPage]: result.quotes });
         setContinuationToken(result.continuationToken);
         setTotalPages(result.totalPages);
+        setLoading(false);
     };
 
     const reset = () => {
@@ -43,7 +46,16 @@ const QuotesGrid: React.FC<QuoteGridProps> = ({ count }) => {
     }, [count])
   
    const quotes = currentPage ? quotesMap[currentPage] : [];
-   if (!quotes?.length) return null;
+   if (!loading && !quotes?.length) return null;
+
+   if (loading && !quotes?.length) {
+         return (
+            <LoadingContainer>
+                <Spinner />
+                <LoadingMessage>Loading quotes...</LoadingMessage>
+            </LoadingContainer>
+        );
+    }
 
    return (
         <>
