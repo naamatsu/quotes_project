@@ -27,3 +27,28 @@ export const Tag = styled.span`
   margin-right: 0.5rem;
   font-size: 0.85rem;
 `;
+
+export const Controls = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1rem;
+`;
+
+export const Button = styled.button<{ disabled?: boolean }>`
+  background: black;
+  color: white;
+  padding: 0.5rem 1rem;
+  border: none;
+  cursor: pointer;
+
+  &:disabled {
+    background: #999;
+    cursor: not-allowed;
+  }
+`;
+
+export const PageInfo = styled.span`
+  font-size: 1rem;
+`;
+

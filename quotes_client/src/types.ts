@@ -10,3 +10,8 @@ export interface Quote {
   url: string;
 }
 
+export type QuoteMap = {
+  [key: number]: Quote[];
+};
+
+

@@ -34,5 +34,5 @@ export interface Session {
 export interface GetQuotesResponse {
    quotes: Quote[];
    continuationToken: string;
-   done: boolean;
+   totalPages: number;
 }

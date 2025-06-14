@@ -11,7 +11,7 @@ interface GetQuotesRequest {
 interface GetQuotesResponse {
    quotes: Quote[];
    continuationToken?: string;
-   done: boolean;
+   totalCount: number;
 }
 
 export const getQuotes = async ({ count, continuationToken} : GetQuotesRequest) => {

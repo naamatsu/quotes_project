@@ -1,6 +1,6 @@
 import axios from "axios";
 import { config } from "../config";
-import { FavQsError, FavQsResponse, GetQuotesResponse, Quote, Session } from "../types/favQsTypes";
+import { FavQsError, FavQsResponse, GetQuotesResponse, Quote } from "../types/favQsTypes";
 import { getOrCreateSession, updateSession } from "./sessionManager";
 
 export const getQuotesByCount = async (count: number, continuationToken?: string): Promise<GetQuotesResponse> => {
@@ -30,7 +30,7 @@ export const getQuotesByCount = async (count: number, continuationToken?: string
   return {
     quotes: batch,
     continuationToken: done ? null : sessionId,
-    done
+    totalPages: Math.ceil(count / config.FAVQS_PAGE_SIZE)
   };
 };
 
